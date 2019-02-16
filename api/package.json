@@ -1,0 +1,25 @@
+{
+  "name": "healthledger-api",
+  "version": "1.0.0",
+  "description": "APIsfor the HealthLedeger",
+  "license": "ISC",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "start": "npm run build && nodemon dist/index.js",
+    "dev": "nodemon dist/index.js",
+    "build": "babel src -d dist",
+    "watch": "babel src -d dist --watch"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "multer": "^1.4.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.18.5"
+  }
+}
