@@ -19,7 +19,7 @@
                     shopping_basket
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Products
+                    Industries
                 </span>
             </div>
             <!-- / APP TITLE -->
@@ -28,7 +28,7 @@
             <div class="search-wrapper mx-32 mx-md-0">
                 <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon>search</mat-icon>
-                    <input #filter placeholder="Search for a product">
+                    <input #filter placeholder="Search for an industry">
                 </div>
             </div>
             <!-- / SEARCH -->
@@ -37,7 +37,7 @@
             <button mat-raised-button
                     [routerLink]="'/apps/e-commerce/products/new'"
                     class="add-product-button fuse-white mt-24 mt-md-0">
-                <span>ADD NEW PRODUCT</span>
+                <span>ADD NEW INDUSTRY</span>
             </button>
             <!-- / ADD BUTTON -->
 
@@ -93,7 +93,7 @@
 
                 <!-- Price Column -->
                 <ng-container matColumnDef="price">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Price</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Market Capitalization (in Millions)</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
                         <p class="price text-truncate">
                             {{product.priceTaxIncl | currency:'USD':'symbol'}}
@@ -103,7 +103,7 @@
 
                 <!-- Quantity Column -->
                 <ng-container matColumnDef="quantity">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Quantity</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>No. of IoT Devices</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-sm>
 
                         <span class="quantity-indicator text-truncate"
@@ -118,7 +118,7 @@
 
                 <!-- Active Column -->
                 <ng-container matColumnDef="active">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Active</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Status of IoT device</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
                         <mat-icon *ngIf="product.active" class="active-icon green-600 s-16">check</mat-icon>
                         <mat-icon *ngIf="!product.active" class="active-icon red-500 s-16">close</mat-icon>

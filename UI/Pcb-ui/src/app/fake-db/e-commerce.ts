@@ -7,7 +7,7 @@ export class ECommerceFakeDb
             'handle'          : 'a-walk-amongst-friends-canvas-print',
             'description'     : 'Officia amet eiusmod eu sunt tempor voluptate laboris velit nisi amet enim proident et. Consequat laborum non eiusmod cillum eu exercitation. Qui adipisicing est fugiat eiusmod esse. Sint aliqua cupidatat pariatur mollit ad est proident reprehenderit. Eiusmod adipisicing laborum incididunt sit aliqua ullamco.',
             'categories'      : [
-                'Canvas Print',
+                'Petrochemicals',
                 'Nature'
             ],
             'tags'            : [
@@ -86,7 +86,7 @@ export class ECommerceFakeDb
             'handle'          : 'braies-lake-canvas-print',
             'description'     : 'Duis anim est non exercitation consequat. Ullamco ut ipsum dolore est elit est ea elit ad fugiat exercitation. Adipisicing eu ad sit culpa sint. Minim irure Lorem eiusmod minim nisi sit est consectetur.',
             'categories'      : [
-                'Canvas Print',
+                'Tyre Manufactures',
                 'Nature'
             ],
             'tags'            : [
@@ -165,7 +165,7 @@ export class ECommerceFakeDb
             'handle'          : 'fall-glow-canvas-print',
             'description'     : 'Sit ipsum esse eu consequat veniam sit consectetur consectetur anim. Ut Lorem dolor ullamco do. Laboris excepteur consectetur tempor nisi commodo amet deserunt duis.',
             'categories'      : [
-                'Canvas Print',
+                'Food Processing',
                 'Nature'
             ],
             'tags'            : [
@@ -244,7 +244,7 @@ export class ECommerceFakeDb
             'handle'          : 'first-snow-canvas-print',
             'description'     : 'Incididunt nostrud culpa labore nostrud veniam nostrud dolore velit sunt laborum ad reprehenderit. Excepteur enim irure ut labore elit ut deserunt qui qui consequat quis do nostrud ad. Aliqua dolor labore ut occaecat laborum irure. Aute in deserunt do aute laborum sit et reprehenderit minim voluptate proident do est.',
             'categories'      : [
-                'Canvas Print',
+                'Food Processing',
                 'Nature'
             ],
             'tags'            : [
@@ -323,7 +323,7 @@ export class ECommerceFakeDb
             'handle'          : 'lago-di-braies-canvas-print',
             'description'     : 'Laboris laborum minim qui reprehenderit duis fugiat ea anim labore incididunt duis. Officia adipisicing anim amet in sit aliqua fugiat quis do sint non velit eu. Labore occaecat labore elit voluptate Lorem adipisicing et ipsum id et reprehenderit ullamco. Elit in nulla laborum nulla quis dolor deserunt magna dolor ad anim magna. Esse aute reprehenderit anim sit est et quis est. Ex reprehenderit culpa deserunt qui sint eiusmod reprehenderit ipsum consequat ut.',
             'categories'      : [
-                'Canvas Print',
+                'Heavy Machinery Manufactures',
                 'Nature'
             ],
             'tags'            : [
@@ -402,7 +402,7 @@ export class ECommerceFakeDb
             'handle'          : 'lago-di-sorapis-canvas-print',
             'description'     : 'Tempor sunt tempor veniam non culpa excepteur. Ea irure elit non cupidatat cillum dolore. Sit incididunt qui dolore ipsum commodo aliqua amet cupidatat incididunt nisi qui consectetur. Cillum eu aute qui irure aute adipisicing cupidatat magna.',
             'categories'      : [
-                'Canvas Print',
+                'Pharma',
                 'Nature'
             ],
             'tags'            : [
@@ -481,7 +481,7 @@ export class ECommerceFakeDb
             'handle'          : 'never-stop-changing-canvas-print',
             'description'     : 'Excepteur commodo ipsum in ex esse elit ea id voluptate id occaecat. Sunt Lorem ipsum ut proident eu aliquip velit non minim. Sunt velit deserunt veniam eu non veniam. Eiusmod sit ex et id incididunt labore aliqua eu aute dolor cillum ex mollit mollit. Incididunt voluptate adipisicing eiusmod non ipsum cupidatat excepteur enim in pariatur eu. Labore dolor qui exercitation amet labore laboris Lorem do adipisicing. Minim non consectetur adipisicing esse ut occaecat incididunt eiusmod commodo et cillum pariatur.',
             'categories'      : [
-                'Canvas Print',
+                'Pharma',
                 'Nature'
             ],
             'tags'            : [
