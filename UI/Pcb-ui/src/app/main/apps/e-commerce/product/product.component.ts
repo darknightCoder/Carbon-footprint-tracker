@@ -159,7 +159,7 @@ export class EcommerceProductComponent implements OnInit, OnDestroy
                 this._ecommerceProductService.onProductChanged.next(data);
 
                 // Show the success message
-                this._matSnackBar.open('Product added', 'OK', {
+                this._matSnackBar.open('Industry added succesfully', 'OK', {
                     verticalPosition: 'top',
                     duration        : 2000
                 });

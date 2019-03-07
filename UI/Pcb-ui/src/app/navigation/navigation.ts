@@ -20,23 +20,10 @@ export const navigation: FuseNavigation[] = [
                         title: 'Analytics',
                         type : 'item',
                         url  : '/apps/dashboards/analytics'
-                    },
-                    {
-                        id   : 'project',
-                        title: 'Overview',
-                        type : 'item',
-                        url  : '/apps/dashboards/project'
                     }
                 ]
             },
-            {
-                id       : 'calendar',
-                title    : 'Calendar',
-                translate: 'NAV.CALENDAR',
-                type     : 'item',
-                icon     : 'today',
-                url      : '/apps/calendar'
-            },
+            
             {
                 id       : 'e-commerce',
                 title    : 'Data In Detail',
@@ -55,7 +42,7 @@ export const navigation: FuseNavigation[] = [
                         id        : 'productDetail',
                         title     : 'Industry Detail',
                         type      : 'item',
-                        url       : '/apps/e-commerce/products/1/printed-dress',
+                        url       : '/apps/e-commerce/products/1/industry-detail',
                         exactMatch: true
                     },
                     /*{
@@ -175,9 +162,9 @@ export const navigation: FuseNavigation[] = [
                 type    : 'collapsable',
                 icon    : 'lock',
                 badge   : {
-                    title: '10',
-                    bg   : '#525e8a',
-                    fg   : '#FFFFFF'
+                    // title: '10',
+                    // bg   : '#525e8a',
+                    // fg   : '#FFFFFF'
                 },
                 children: [
                     {
@@ -192,12 +179,12 @@ export const navigation: FuseNavigation[] = [
                         type : 'item',
                         url  : '/pages/auth/login-2'
                     },
-                    {
-                        id   : 'register',
-                        title: 'Administrative Login',
-                        type : 'item',
-                        url  : '/pages/auth/register'
-                    },
+                    // {
+                    //     id   : 'register',
+                    //     title: 'Administrative Login',
+                    //     type : 'item',
+                    //     url  : '/pages/auth/register'
+                    // },
                     
                     {
                         id   : 'forgot-password',

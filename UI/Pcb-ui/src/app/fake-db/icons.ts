@@ -2972,8 +2972,8 @@ export class IconsFakeDb
             'tags'    : ['nature_people']
         },
         {
-            'name'    : 'nature',
-            'ligature': 'nature',
+            'name'    : 'Petrochemicals',
+            'ligature': 'Petrochemicals',
             'tags'    : ['nature']
         },
         {

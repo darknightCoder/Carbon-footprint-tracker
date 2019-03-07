@@ -6,7 +6,7 @@ export class AnalyticsDashboardDb
             datasets : {
                 '2016': [
                     {
-                        label: 'Sales',
+                        label: 'AQI',
                         data : [190, 200, 198, 220, 190, 250, 200, 190, 200, 310, 400, 350],
                         fill : 'start'
 
@@ -14,7 +14,7 @@ export class AnalyticsDashboardDb
                 ],
                 '2017': [
                     {
-                        label: 'Sales',
+                        label: 'AQI',
                         data : [300, 280, 198, 220, 245, 250, 200, 230, 200, 310, 420, 350],
                         fill : 'start'
 
@@ -22,7 +22,7 @@ export class AnalyticsDashboardDb
                 ],
                 '2018': [
                     {
-                        label: 'Sales',
+                        label: 'AQI',
                         data : [190, 280, 198, 220, 245, 250, 200, 190, 200, 310, 400, 350],
                         fill : 'start'
 
@@ -107,7 +107,7 @@ export class AnalyticsDashboardDb
             chartType : 'bar',
             datasets  : [
                 {
-                    label: 'Conversion',
+                    label: 'Emission',
                     data : [221, 428, 492, 471, 413, 344, 294]
                 }
             ],
@@ -152,13 +152,13 @@ export class AnalyticsDashboardDb
         },
         widget3: {
             impressions: {
-                value   : '87k',
+                value   : '80%',
                 ofTarget: 12
             },
             chartType  : 'line',
             datasets   : [
                 {
-                    label: 'Impression',
+                    label: 'Performance',
                     data : [67000, 54000, 82000, 57000, 72000, 57000, 87000, 72000, 89000, 98700, 112000, 136000, 110000, 149000, 98000],
                     fill : false
                 }
@@ -220,7 +220,7 @@ export class AnalyticsDashboardDb
             chartType: 'bar',
             datasets : [
                 {
-                    label: 'Visits',
+                    label: 'device installation',
                     data : [432, 428, 327, 363, 456, 267, 231]
                 }
             ],
@@ -268,25 +268,25 @@ export class AnalyticsDashboardDb
             datasets : {
                 'yesterday': [
                     {
-                        label: 'Visitors',
+                        label: 'NO2 Emission',
                         data : [190, 300, 340, 220, 290, 390, 250, 380, 410, 380, 320, 290],
                         fill : 'start'
 
                     },
                     {
-                        label: 'Page views',
+                        label: 'Total Emission in ppm',
                         data : [2200, 2900, 3900, 2500, 3800, 3200, 2900, 1900, 3000, 3400, 4100, 3800],
                         fill : 'start'
                     }
                 ],
                 'today'    : [
                     {
-                        label: 'Visitors',
+                        label: 'NO2 Emission',
                         data : [410, 380, 320, 290, 190, 390, 250, 380, 300, 340, 220, 290],
                         fill : 'start'
                     },
                     {
-                        label: 'Page Views',
+                        label: 'Total Emission in ppm',
                         data : [3000, 3400, 4100, 3800, 2200, 3200, 2900, 1900, 2900, 3900, 2500, 3800],
                         fill : 'start'
 
