@@ -1,5 +1,5 @@
 {
-	"data": [{
+	"response": {
 		"sensors": [0, 1],
 		"boilerLocation": {
 			"latitude": 28.123,
@@ -27,5 +27,5 @@
 				"silicon": ""
 			}
 		}
-	}]
+	}
 }
