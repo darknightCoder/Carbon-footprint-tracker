@@ -15,7 +15,9 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.4",
-    "multer": "^1.4.1"
+    "multer": "^1.4.1",
+    "node-cron": "^2.0.3",
+    "random-number": "0.0.9"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
