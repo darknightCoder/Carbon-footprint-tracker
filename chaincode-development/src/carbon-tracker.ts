@@ -1,67 +1,86 @@
 import { Context, Contract } from 'fabric-contract-api';
-import { AssetDetails } from './models/Asset.model';
+import { Boiler, BoilerData, GaseousParams, LiqidParams } from './models/carbon-tracker.model';
 
-export class PropertiesContract extends Contract {
+export class BoilerDataContract extends Contract {
 
     public async initLedger(ctx: Context) {
      
-        const assets: AssetDetails[] = [
+        const boiler: Boiler[] = [
             {
-                propertyArea: '1400 sqft.',
-                ownerName: 'sam dave', 
-                value: 12332,
-                location : '12 avenue,richar street , california',
-                type: 'single',
-                propertyNumber: 'P1000001'
+ 
+                'latitude': 28.123,
+                'longitude': 120.51,
+                'industryType': 1,
+                'industryName': '',
+                'boilerID': 'BL736',
+
             },
             {
-                propertyArea: '1400 sqft.',
-                ownerName: 'sam dave',
-                value: 12332,
-                location : '12 avenue,richar street , california',
-                type: 'single',
-                propertyNumber: 'P1000002'
+                'latitude': 28.123,
+                'longitude': 120.51,
+                'industryType': 1,
+                'industryName': '',
+                'boilerID': 'BL436',
             }
         ];
+        const boilerData:BoilerData = {
+            boilerID: 'BL436',
+            gaseous: null,
+            liquid: null
+        };
 
-        for (let i = 0; i < assets.length; i++) {
-            
-            await ctx.stub.putState(assets[i].propertyNumber, Buffer.from(JSON.stringify(assets[i])));
-            console.info('Added <--> ', assets[i]);
+        for (let i = 0; i < boiler.length; i++) {            
+            await ctx.stub.putState(boiler[i].boilerID, Buffer.from(JSON.stringify(boiler[i])));
+            console.info('Added <--> ', boiler[i]);
         }
         console.info('============= END : Initialize Ledger ===========');
     }
 
-    public async queryAsset(ctx: Context, assetNumber: string): Promise<string> {
-        const assetAsBytes = await ctx.stub.getState(assetNumber); // get the car from chaincode state
+    public async queryBoilerIoTData(ctx: Context, boilerID: string): Promise<string> {
+        const assetAsBytes = await ctx.stub.getState(boilerID); // get the car from chaincode state
         if (!assetAsBytes || assetAsBytes.length === 0) {
-            throw new Error(`${assetNumber} does not exist`);
+            throw new Error(`${boilerID} does not exist`);
         }
         console.log(assetAsBytes.toString());
         return assetAsBytes.toString();
     }
 
-    public async createProperty(ctx: Context, propertyNumber: string, propertyArea: string, cost: number, type: string, location: string,value: number, ownerName: string) {
+    public async createBoiler(ctx: Context,boilerID: string, latitude: string, longitude: string, industryType: number, industryName: string) {
        
-        const assetDetailsAsBytes = await ctx.stub.getState(propertyNumber); // get the car from chaincode state
+        const assetDetailsAsBytes = await ctx.stub.getState(boilerID); // get the car from chaincode state
         console.log(assetDetailsAsBytes)
         if (assetDetailsAsBytes && assetDetailsAsBytes.length >= 0) {
-            throw new Error(`${propertyNumber} already exists`);
+            throw new Error(`${boilerID} already exists`);
         }
 
-        const asset: AssetDetails = {
-            propertyArea,
-            location,
-            propertyNumber,
-            type,
-            value,
-            ownerName,
+        const boiler: Boiler = {
+            'latitude': 28.123,
+            'longitude': 120.51,
+            'industryType': 1,
+            'industryName': '',
+            'boilerID': 'BL736',
         };
 
-        await ctx.stub.putState(propertyNumber, Buffer.from(JSON.stringify(asset)));
+        await ctx.stub.putState(boilerID, Buffer.from(JSON.stringify(boiler)));
       
     }
+    public async createIoTBoilerData(ctx: Context,boilerID: string, gaseous: string, liquid: string) {
+       
+        const assetDetailsAsBytes = await ctx.stub.getState(boilerID); // get the car from chaincode state
+        console.log(assetDetailsAsBytes)
+        if (assetDetailsAsBytes && assetDetailsAsBytes.length >= 0) {
+            throw new Error(`${boilerID} already exists`);
+        }
 
+        const boiler: BoilerData = {
+            'boilerID': 28.123,
+            'gaseous': JSON.parse(gaseous),
+            'liquid': JSON.parse(liquid),
+        };
+
+        await ctx.stub.putState(boilerID, Buffer.from(JSON.stringify(boiler)));
+      
+    }
     public async queryAllAssets(ctx: Context, startKey: string, endKey: string): Promise<string> {
 
 
@@ -93,18 +112,5 @@ export class PropertiesContract extends Contract {
         }
     }
 
-    public async changePropertyOwner(ctx: Context, propertyNumber: string, newOwner: string) {
-        console.info('============= START : changeOwner ===========');
-
-        const assetDetailsAsBytes = await ctx.stub.getState(propertyNumber); // get the car from chaincode state
-        if (!assetDetailsAsBytes || assetDetailsAsBytes.length === 0) {
-            throw new Error(`${propertyNumber} does not exist`);
-        }
-        const asset: AssetDetails = JSON.parse(assetDetailsAsBytes.toString());
-        asset.ownerName = newOwner;
-
-        await ctx.stub.putState(propertyNumber, Buffer.from(JSON.stringify(asset)));
-        console.info('============= END : changeCarOwner ===========');
-    }
 
 }

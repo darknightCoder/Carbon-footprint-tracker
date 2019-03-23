@@ -2,6 +2,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { PropertiesContract } from './property-contract';
+import { BoilerDataContract } from './carbon-tracker';
 
-export const contracts: any[] = [ PropertiesContract ];
+export const contracts: any[] = [ BoilerDataContract ];
