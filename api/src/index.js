@@ -6,6 +6,8 @@ import pollution from './routes/pol.control.data';
 import session from './routes/session';
 import user from './routes/user';
 
+import { pushData } from './scheduler/iot.mock.data';
+
 const app = express();
 
 app.use(cors({}));
@@ -16,6 +18,10 @@ app.use('/pollutions', pollution);
 app.use('/sessions', session);
 app.use('/users', user);
 app.get('/healthcheck', async (req, res) => res.sendStatus(200));
+
+pushData().then(() => {
+  console.log("IOT data started...");
+})
 
 const main = async () => {
   try {
