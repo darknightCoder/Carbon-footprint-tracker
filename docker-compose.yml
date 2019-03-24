@@ -2,13 +2,13 @@ version: '3.5'
 services:
   rates-ui:
     build:
-      context: ./UI
+      context: ./UI/Pcb-ui
       dockerfile: Dockerfile
     ports:
       - "4200:80"
     volumes:
-      - ./UI/src:/app/public:delegated
-      - ./UI/src:/app/src:delegated
+      - ./UI/Pcb-ui/src:/app/public:delegated
+      - ./UI/Pcb-ui/src:/app/src:delegated
     environment:
       REST_API_URL_REPLACE: http:\/\/localhost:3100\/   
     logging:
