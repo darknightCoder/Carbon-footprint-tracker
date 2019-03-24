@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class AnalyticsDashboardService implements Resolve<any>
 {
     widgets: any[];
-
+    abc:any[];
     /**
      * Constructor
      *
@@ -31,7 +31,8 @@ export class AnalyticsDashboardService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             Promise.all([
-                this.getWidgets()
+                this.getWidgets(),
+               this.getAQI()
             ]).then(
                 () => {
                     resolve();
@@ -55,5 +56,16 @@ export class AnalyticsDashboardService implements Resolve<any>
                     resolve(response);
                 }, reject);
         });
+    }
+    getAQI():Promise<any>
+    {
+        return new Promise((resolve,reject)=>{
+            this._httpClient.get('http://localhost:9090/pollutions/aqi').subscribe((response:any)=>{
+                this.abc=response;
+                console.log(this.abc)
+                debugger;
+                resolve(response);
+            },reject)
+        })
     }
 }

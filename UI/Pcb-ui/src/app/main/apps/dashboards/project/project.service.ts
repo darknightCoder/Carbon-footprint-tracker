@@ -8,6 +8,7 @@ export class ProjectDashboardService implements Resolve<any>
 {
     projects: any[];
     widgets: any[];
+    abc:any;
 
     /**
      * Constructor
@@ -34,7 +35,8 @@ export class ProjectDashboardService implements Resolve<any>
 
             Promise.all([
                 this.getProjects(),
-                this.getWidgets()
+                this.getWidgets(),
+                this.getAQI()
             ]).then(
                 () => {
                     resolve();
@@ -74,5 +76,15 @@ export class ProjectDashboardService implements Resolve<any>
                     resolve(response);
                 }, reject);
         });
+    }
+
+    getAQI():Promise<any>
+    {
+        return new Promise((resolve,reject)=>{
+            this._httpClient.get('http://localhost:9090/pollutions/aqi').subscribe((response:any)=>{
+                this.abc=response;
+                resolve(response);
+            },reject)
+        })
     }
 }
