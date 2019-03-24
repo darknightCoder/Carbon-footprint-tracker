@@ -1,0 +1,56 @@
+version: '3.5'
+services:
+  rates-ui:
+    build:
+      context: ./UI
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    volumes:
+      - ./UI/src:/app/public:delegated
+      - ./UI/src:/app/src:delegated
+    environment:
+      REST_API_URL_REPLACE: http:\/\/localhost:3100\/   
+    logging:
+      options:
+        max-size: 10m
+    networks:
+      - healthledger_network
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    command: npm run start
+    ports:
+      - "9090:9090"
+    depends_on:
+      - mongodb
+    volumes:
+      - ./api/dist:/app/dist:delegated
+      - ./api/package.json:/app/package.json:delegated
+      - ./api/package-lock.json:/app/package-lock.json:delegated
+    environment:
+      PORT: 3100
+      DB_URL: 'mongodb://mongodb:27017/'
+      MONGODB_URI_LOCAL: 'mongodb://mongodb:27017/rates'
+      DB_NAME: 'healthledger'
+      DB_USER_COLLECTION: 'healthledger'
+    networks:
+      - healthledger_network
+
+
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+    volumes:
+      - ./db-data:/data/db
+    logging:
+      options:
+        max-size: 100m
+    networks:
+      - healthledger_network
+
+networks:
+  healthledger_network:
+    driver: bridge
