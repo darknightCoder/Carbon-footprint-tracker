@@ -163,6 +163,15 @@ export class ProjectDashboardComponent implements OnInit
         this.widget11.onContactsChanged = new BehaviorSubject({});
         this.widget11.onContactsChanged.next(this.widgets.widget11.table.rows);
         this.widget11.dataSource = new FilesDataSource(this.widget11);
+
+        /**
+         * Added by akhil.pillai1
+         * api call connecting AQI data and year
+         * 
+         */
+       let kk= this.widgets.widget1.datasets['2016'][0].data;
+       console.log(kk+ "kk")
+
     }
 
     // -----------------------------------------------------------------------------------------------------

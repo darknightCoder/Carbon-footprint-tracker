@@ -1,4 +1,4 @@
-let airPollutionControlData = async() => {
+let airPollutionControlData = async () => {
     try {
         const data = [{
             "parameter": "PM2.5",
@@ -32,6 +32,29 @@ let airPollutionControlData = async() => {
     }
 };
 
+let averageAQIdata = async () => {
+    try {
+        const aqi = [{
+            data: [190, 200, 198, 220, 190, 250, 200, 190, 200, 310, 400, 350],
+            year: 2018
+        },
+        {
+            data: [300, 280, 198, 220, 245, 250, 200, 230, 200, 310, 420, 350],
+            year: 2017
+        },
+        {
+            data: [190, 280, 198, 220, 245, 250, 200, 190, 200, 310, 400, 350],
+            year: 2016
+        }
+
+        ]
+        return Promise.resolve(aqi);
+    } catch (error) {
+        return Promise.reject(error);
+    }
+}
+
 export {
-    airPollutionControlData    
+    airPollutionControlData,
+    averageAQIdata
 }

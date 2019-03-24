@@ -3,6 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
 
 import { AnalyticsDashboardService } from 'app/main/apps/dashboards/analytics/analytics.service';
+import { resolve } from 'dns';
 
 @Component({
     selector     : 'analytics-dashboard',
@@ -16,7 +17,7 @@ export class AnalyticsDashboardComponent implements OnInit
     widgets: any;
     widget1SelectedYear = '2016';
     widget5SelectedDay = 'today';
-
+    abc:any;
     /**
      * Constructor
      *
@@ -41,6 +42,22 @@ export class AnalyticsDashboardComponent implements OnInit
     {
         // Get the widgets from the service
         this.widgets = this._analyticsDashboardService.widgets;
+       // this.
+       // this.widgets.widget1.datasets['2016'][0].data=this.abc[0].data
+       this.abc=this._analyticsDashboardService.abc;
+       console.log("abc is "+ this.abc)
+       this.abc.forEach(element => {
+           if(element.year=='2018'){
+            this.widgets.widget1.datasets['2018'][0].data=element.data;
+           }
+           if(element.year=='2017'){
+            this.widgets.widget1.datasets['2017'][0].data=element.data;
+           }
+           if(element.year=='2016'){
+            this.widgets.widget1.datasets['2016'][0].data=element.data;
+           }
+       });
+       
     }
 
     // -----------------------------------------------------------------------------------------------------
