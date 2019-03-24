@@ -1,0 +1,31 @@
+{
+	"response": {
+		"sensors": [0, 1],
+		"boilerLocation": {
+			"latitude": 28.123,
+			"longitude": 120.51
+		},
+		"industryType": 1,
+		"industryName": "",
+		"timeStamp": "",
+		"deviceId": [23, 59],
+		"boilerID": "BL736",
+		"data": {
+			"gaseous": {
+				"NH3": "",
+				"NOx": "",
+				"suphor": "",
+				"phosphorus": "",
+				"CO": "",
+				"CO2": "",
+				"SO2": "",
+				"CH4": ""
+			},
+			"liquid": {
+				"alcohol": "",
+				"benzene": "",
+				"silicon": ""
+			}
+		}
+	}
+}
