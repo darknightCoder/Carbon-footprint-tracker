@@ -16,7 +16,7 @@ export class FuseConfigService
     // Private
     private _configSubject: BehaviorSubject<any>;
     private readonly _defaultConfig: any;
-
+    private role:String;
     /**
      * Constructor
      *
@@ -155,6 +155,12 @@ export class FuseConfigService
     {
         // Set the config from the default config
         this._configSubject.next(_.cloneDeep(this._defaultConfig));
+    }
+    setRole(value){
+        this.role=value;
+    }
+    getRole(){
+        return this.role;
     }
 }
 

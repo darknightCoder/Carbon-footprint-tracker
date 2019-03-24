@@ -36,8 +36,8 @@
             <!-- ADD BUTTON -->
             <button mat-raised-button
                     [routerLink]="'/apps/e-commerce/products/new'"
-                    class="add-product-button fuse-white mt-24 mt-md-0">
-                <span>ADD NEW INDUSTRY</span>
+                    class="add-product-button fuse-white mt-24 mt-md-0" >
+                <span *ngIf="isAdmin=='admin'">ADD NEW INDUSTRY</span>
             </button>
             <!-- / ADD BUTTON -->
 
@@ -126,13 +126,21 @@
                 </ng-container>
 
                 <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-
+               <section *ngIf="isAdmin=='admin'">
                 <mat-row *matRowDef="let product; columns: displayedColumns;"
                          class="product"
                          matRipple
-                         [routerLink]="'/apps/e-commerce/products/'+product.id+'/'+product.handle">
-                </mat-row>
-
+                         [routerLink]="'/apps/e-commerce/products/'+product.id+'/'+product.handle"
+                         >
+                </mat-row >
+            </section>
+            <section *ngIf="isAdmin!='admin'">
+                <mat-row *matRowDef="let product; columns: displayedColumns;"
+                         class="product"
+                         matRipple
+                         >
+                </mat-row >
+</section>
             </mat-table>
 
             <mat-paginator #paginator

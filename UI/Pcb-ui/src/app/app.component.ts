@@ -11,7 +11,7 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 
-import { navigation } from 'app/navigation/navigation';
+import { navigation,companyNavigation } from 'app/navigation/navigation';
 import { locale as navigationEnglish } from 'app/navigation/i18n/en';
 import { locale as navigationTurkish } from 'app/navigation/i18n/tr';
 
@@ -52,7 +52,11 @@ export class AppComponent implements OnInit, OnDestroy
     )
     {
         // Get default navigation
+        if(this._fuseConfigService.getRole()=='admin'){
         this.navigation = navigation;
+        }else{
+            this.navigation=companyNavigation;
+        }
 
         // Register the navigation to the service
         this._fuseNavigationService.register('main', this.navigation);
