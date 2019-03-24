@@ -5,7 +5,7 @@ services:
       context: ./UI/Pcb-ui
       dockerfile: Dockerfile
     ports:
-      - "4200:80"
+      - "4200:81"
     volumes:
       - ./UI/Pcb-ui/src:/app/public:delegated
       - ./UI/Pcb-ui/src:/app/src:delegated
@@ -20,16 +20,12 @@ services:
   api:
     build:
       context: ./api
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile 
     command: npm run start
     ports:
       - "9090:9090"
     depends_on:
       - mongodb
-    volumes:
-      - ./api/dist:/app/dist:delegated
-      - ./api/package.json:/app/package.json:delegated
-      - ./api/package-lock.json:/app/package-lock.json:delegated
     environment:
       PORT: 3100
       DB_URL: 'mongodb://mongodb:27017/'
