@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { Router } from '@angular/router';
 
 @Component({
     selector     : 'login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private router: Router
     )
     {
         // Configure the layout
@@ -58,5 +60,9 @@ export class LoginComponent implements OnInit
             email   : ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
+    }
+
+    login (){
+        this.router.navigateByUrl('apps/dashboards/analytics');
     }
 }

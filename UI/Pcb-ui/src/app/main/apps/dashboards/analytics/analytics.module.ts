@@ -36,7 +36,7 @@ const routes: Routes = [
         MatTabsModule,
 
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyD81ecsCj4yYpcXSLFcYU97PvRsE_X8Bx8'
+            apiKey: 'AIzaSyDbYsAe4UUDVGB9KQeZE4Y4ZtUZX64LrqM'
         }),
         ChartsModule,
         NgxChartsModule,

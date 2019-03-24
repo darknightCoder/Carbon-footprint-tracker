@@ -5,7 +5,7 @@
         <div id="login-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
 
             <div class="logo">
-                <img src="assets/images/logos/fuse.svg">
+                <img src="assets/images/logos/fuse.png">
             </div>
 
             <div class="title">LOGIN TO YOUR ACCOUNT</div>
@@ -46,7 +46,7 @@
                     </a>
                 </div>
 
-                <button mat-raised-button color="accent" class="submit-button" aria-label="LOG IN"
+                <button mat-raised-button color="accent" (click)="login()" class="submit-button" aria-label="LOG IN"
                         [disabled]="loginForm.invalid">
                     LOGIN
                 </button>
@@ -57,13 +57,6 @@
                 <span class="text">OR</span>
             </div>
 
-            <button mat-raised-button class="google">
-                Log in with Google
-            </button>
-
-            <button mat-raised-button class="facebook">
-                Log in with Facebook
-            </button>
 
             <div class="register" fxLayout="column" fxLayoutAlign="center center">
                 <span class="text">Don't have an account?</span>

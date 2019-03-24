@@ -130,7 +130,7 @@ export class AppComponent implements OnInit, OnDestroy
             .subscribe((config) => {
 
                 this.fuseConfig = config;
-                debugger;
+             
                 // Boxed
                 if ( this.fuseConfig.layout.width === 'boxed' )
                 {
