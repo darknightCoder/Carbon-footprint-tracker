@@ -1,31 +1,34 @@
-let saveUser = async (name, email, password, address, dob) => {
+import User from '../models/User';
+
+let saveUser = async (name, email, password, role) => {
     try {
         let response = {};
         response.name = name;
         response.email = email;
+        response.password = password;
+        response.role = role;
+        await User.create({ name: name, email: email, password: password, role: role }, (err, obj) => {
+            if(!err) {
+               JSON.parse(JSON.stringify(obj));
+               console.log(obj);
+               response = obj;
+            }
+        });        
         return Promise.resolve(response);
     } catch (err) {
         return Promise.reject(err);
     }
 };
 
-let getUser = async (id) => {
-    console.log(id)
-    let userDetails = {};
-    try { if(id=='admin@test.ey.com'){
-        
-        userDetails.id = 1;
-        userDetails.name = 'Abhinaba Das';
-        userDetails.email = 'noreply@gds.ey.com';
-        userDetails.role='admin'
-    }
-    if(id=='company@test.ey.com'){
-       
-        userDetails.id = 2;
-        userDetails.name = 'Abhinaba Das';
-        userDetails.email = 'noreply@gds.ey.com';
-        userDetails.role='company'
-    }
+let getUser = async (id) => {    
+    try {
+        let userDetails = {};
+        await User.findById(id, (err, obj) => {
+            if(!err) {
+                JSON.parse(JSON.stringify(obj));                
+                userDetails = obj;
+            }
+        });
         return Promise.resolve(userDetails);
     } catch (err) {
         return Promise.reject(err);
@@ -33,19 +36,14 @@ let getUser = async (id) => {
 };
 
 let getUsers = async (id) => {
-    try {
-       
+    try {       
         let userDetailsList = [];
-        let userDetails = {};
-        userDetails.id = 1;
-        userDetails.name = 'Abhinaba Das';
-        userDetails.email = 'noreply@ey.com';
-        userDetailsList.push(userDetails);
-        userDetails = {};
-        userDetails.id = 2;
-        userDetails.name = 'Isabella';
-        userDetails.email = 'noreply@us.ey.com';
-        userDetailsList.push(userDetails);
+        await User.find({}, (err, obj) => {
+            if(!err) {
+                JSON.parse(JSON.stringify(obj));
+                userDetailsList = obj;
+            }
+        });
         return Promise.resolve(userDetailsList);
     } catch (err) {
         return Promise.resolve(err);

@@ -5,8 +5,8 @@ let login = async (email, password) => {
         let response = {}
         await User.findOne({ email: email, password: password }, (err, obj) => {
             if(!err) {
-               JSON.parse(JSON.stringify(obj))
-               response = obj
+               JSON.parse(JSON.stringify(obj));
+               response = obj;
             }         
         });        
         return Promise.resolve(response); 
@@ -20,8 +20,8 @@ let authorityLogin = async (email, password) => {
         let response = {};
         await User.findOne({ email: email, password: password }, (err, obj) => {
             if(!err) {
-               JSON.parse(JSON.stringify(obj))
-               response = obj
+               JSON.parse(JSON.stringify(obj));
+               response = obj;
             }         
         });
         return Promise.resolve(response);

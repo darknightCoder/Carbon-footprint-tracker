@@ -9,9 +9,9 @@ const {
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    const { name, email, password, address, dob } = req.body;
+    const { name, email, password, role } = req.body;
     try {
-        let userDetails = await saveUser(name, email, password, address, dob);
+        let userDetails = await saveUser(name, email, password, role);
         res.status(200).json(userDetails);
     } catch (err) {
         res.status(500).json({ error: err.message });
