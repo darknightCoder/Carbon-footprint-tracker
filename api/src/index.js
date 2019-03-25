@@ -2,6 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
+import { connectDb } from './db';
+
 import pollution from './routes/pol.control.data';
 import session from './routes/session';
 import user from './routes/user';
@@ -20,11 +22,12 @@ app.use('/users', user);
 app.get('/healthcheck', async (req, res) => res.sendStatus(200));
 
 pushData().then(() => {
-  console.log("IOT data started...");
+  console.log("Started pushing IOT mock data...");
 })
 
 const main = async () => {
   try {
+      await connectDb("mongodb://localhost:27017/carbon-footprint");
       app.listen(9090);
       console.log("Application started on port 9090");
   } catch (err) {    

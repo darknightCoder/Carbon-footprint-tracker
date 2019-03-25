@@ -45,9 +45,7 @@ let pushData = async() => {
 
         response.data = data;
 
-        iotDeviceData.response = response;
-
-        console.log(JSON.stringify(iotDeviceData));
+        iotDeviceData.response = response
     });
 };
 
