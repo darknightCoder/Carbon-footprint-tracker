@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
-import { navigation } from 'app/navigation/navigation';
+import { navigation ,companyNavigation} from 'app/navigation/navigation';
 
 @Component({
     selector     : 'toolbar',
@@ -83,8 +83,13 @@ export class ToolbarComponent implements OnInit, OnDestroy
                 flag : 'tr'
             }
         ];
-
+        //akhil commenting the following line
+       // this.navigation = navigation;
+       if(this._fuseConfigService.getRole()=='admin'){
         this.navigation = navigation;
+        }else{
+            this.navigation=companyNavigation;
+        }
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();

@@ -26,6 +26,11 @@ const appRoutes: Routes = [
         loadChildren: './main/apps/apps.module#AppsModule'
     },
     {
+
+        path         : 'login',
+        loadChildren : './main/pages/authentication/login/login.module#LoginModule'
+    },
+    {
         path        : 'pages',
         loadChildren: './main/pages/pages.module#PagesModule'
     },
@@ -43,7 +48,7 @@ const appRoutes: Routes = [
     },
     {
         path      : '**',
-        redirectTo: 'apps/dashboards/analytics'
+        redirectTo: 'login'
     }
 ];
 

@@ -7,7 +7,8 @@ export class AnalyticsDashboardDb
                 '2016': [
                     {
                         label: 'Sales',
-                        data : [190, 200, 198, 220, 190, 250, 200, 190, 200, 310, 400, 350],
+                        // data : [190, 200, 198, 220, 190, 250, 200, 190, 200, 310, 400, 350],
+                       data:[],
                         fill : 'start'
 
                     }
@@ -15,7 +16,8 @@ export class AnalyticsDashboardDb
                 '2017': [
                     {
                         label: 'Sales',
-                        data : [300, 280, 198, 220, 245, 250, 200, 230, 200, 310, 420, 350],
+                       data:[],
+                        // data : [300, 280, 198, 220, 245, 250, 200, 230, 200, 310, 420, 350],
                         fill : 'start'
 
                     }
@@ -23,7 +25,8 @@ export class AnalyticsDashboardDb
                 '2018': [
                     {
                         label: 'Sales',
-                        data : [190, 280, 198, 220, 245, 250, 200, 190, 200, 310, 400, 350],
+                        data:[],
+                        // data : [190, 280, 198, 220, 245, 250, 200, 190, 200, 310, 400, 350],
                         fill : 'start'
 
                     }

@@ -10,11 +10,22 @@ let saveUser = async (name, email, password, address, dob) => {
 };
 
 let getUser = async (id) => {
-    try {
-        let userDetails = {};
+    console.log(id)
+    let userDetails = {};
+    try { if(id=='admin@test.ey.com'){
+        
         userDetails.id = 1;
         userDetails.name = 'Abhinaba Das';
         userDetails.email = 'noreply@gds.ey.com';
+        userDetails.role='admin'
+    }
+    if(id=='company@test.ey.com'){
+       
+        userDetails.id = 2;
+        userDetails.name = 'Abhinaba Das';
+        userDetails.email = 'noreply@gds.ey.com';
+        userDetails.role='company'
+    }
         return Promise.resolve(userDetails);
     } catch (err) {
         return Promise.reject(err);
@@ -23,6 +34,7 @@ let getUser = async (id) => {
 
 let getUsers = async (id) => {
     try {
+       
         let userDetailsList = [];
         let userDetails = {};
         userDetails.id = 1;

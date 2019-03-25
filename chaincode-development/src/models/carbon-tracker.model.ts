@@ -7,8 +7,8 @@ export class Boiler {
 };
 export class BoilerData {
     public boilerID;
-    public gaseous: GaseousParams;
-    public liquid: LiqidParams;
+    public gaseous: GaseousParams[];
+    public liquid: LiqidParams[];
 }
 export class GaseousParams {
     public NH3;
