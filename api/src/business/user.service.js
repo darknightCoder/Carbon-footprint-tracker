@@ -35,7 +35,7 @@ let getUser = async (id) => {
     }
 };
 
-let getUsers = async (id) => {
+let getUsers = async () => {
     try {       
         let userDetailsList = [];
         await User.find({}, (err, obj) => {

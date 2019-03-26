@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import { connectDb } from './db';
 
+import device from './routes/device';
 import pollution from './routes/pol.control.data';
 import session from './routes/session';
 import user from './routes/user';
@@ -16,6 +17,7 @@ app.use(cors({}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use('/devices', device);
 app.use('/pollutions', pollution);
 app.use('/sessions', session);
 app.use('/users', user);
