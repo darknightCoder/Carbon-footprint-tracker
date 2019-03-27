@@ -23,9 +23,8 @@ export class EcommerceProductComponent implements OnInit, OnDestroy
 {
     product:any = {};
     iot:any = {};
-    pageType: string;
     productForm: FormGroup;
-    pageType= 'new'
+    pageType:String= 'new'
 
     // Private
     private _unsubscribeAll: Subject<any>;
