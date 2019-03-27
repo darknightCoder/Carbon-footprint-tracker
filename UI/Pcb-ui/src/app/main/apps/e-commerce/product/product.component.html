@@ -124,62 +124,68 @@
                         </mat-tab>
 
                         <mat-tab label="IOT and Channel Details" fxLayout="column" fxFlex>
-                            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                <mat-label>Device ID</mat-label>
-                                <input matInput placeholder="deviceId"
-                                       name="deviceId"
-                                       formControlName="deviceId"
-                                       required>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                <mat-label>Device Type</mat-label>
-                                <input matInput placeholder="deviceType"
-                                       name="deviceType"
-                                       formControlName="deviceType"
-                                       required>
-                            </mat-form-field>
+                            <div class="tab-content p-24">
+                                    <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                            <mat-label>Device ID</mat-label>
+                                            <input matInput placeholder="deviceId"
+                                                   name="deviceId"
+                                                   formControlName="deviceId"
+                                                   required>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                            <mat-label>Device Type</mat-label>
+                                            <input matInput placeholder="deviceType"
+                                                   name="deviceType"
+                                                   formControlName="deviceType"
+                                                   required>
+                                        </mat-form-field>
+            
+                                        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                            <mat-label>Boiler Id</mat-label>
+                                            <input matInput placeholder="boilerId"
+                                                   name="boilerId"
+                                                   formControlName="boilerId"
+                                                   required>
+                                        </mat-form-field>
+            
+                                        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                            <mat-label>Longitude</mat-label>
+                                            <input matInput placeholder="longitude"
+                                                   name="longitude"
+                                                   formControlName="longitude"
+                                                   required>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                            <mat-label>Latitude</mat-label>
+                                            <input matInput placeholder="latitude"
+                                                   name="latitude"
+                                                   formControlName="latitude"
+                                                   required>
+                                        </mat-form-field>
+                            </div>
 
-                            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                <mat-label>Boiler Id</mat-label>
-                                <input matInput placeholder="boilerId"
-                                       name="boilerId"
-                                       formControlName="boilerId"
-                                       required>
-                            </mat-form-field>
-
-                            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                <mat-label>Longitude</mat-label>
-                                <input matInput placeholder="longitude"
-                                       name="longitude"
-                                       formControlName="longitude"
-                                       required>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                <mat-label>Latitude</mat-label>
-                                <input matInput placeholder="latitude"
-                                       name="latitude"
-                                       formControlName="latitude"
-                                       required>
-                            </mat-form-field>
                         </mat-tab>
 
                         <mat-tab label="Channel Details">
+                                <div class="tab-content p-24">
+                                        <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                                <mat-label>Channel</mat-label>
+                                                <input matInput placeholder="channel"
+                                                       name="channel"
+                                                       formControlName="channel"
+                                                       required>
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                                <mat-label>Delay</mat-label>
+                                                <input matInput placeholder="delay"
+                                                       name="delay"
+                                                       formControlName="delay"
+                                                       required>
+                
+                                            </mat-form-field>
+                                </div>
 
-                            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                <mat-label>Channel</mat-label>
-                                <input matInput placeholder="channel"
-                                       name="channel"
-                                       formControlName="channel"
-                                       required>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                <mat-label>Delay</mat-label>
-                                <input matInput placeholder="delay"
-                                       name="delay"
-                                       formControlName="delay"
-                                       required>
 
-                            </mat-form-field>
                         </mat-tab>
 
                         <mat-tab label="Tax And Production Details">
