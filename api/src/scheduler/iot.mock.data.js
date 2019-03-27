@@ -1,5 +1,8 @@
 import cron from 'node-cron';
 import rn from 'random-number';
+import request from 'request';
+
+const { getDevicesByBoilerID } = require('../business/device.service');
 
 let pushData = async() => {
     let gen = rn.generator({
@@ -10,21 +13,29 @@ let pushData = async() => {
 
     let iotDeviceData = {};
     let response = {};
+    response.boilerID = "BL736";
+    response.deviceId = [];
+
+    let deviceDetailsList = await getDevicesByBoilerID('BL736');
+
+    deviceDetailsList.forEach((deviceDetails) => {
+        response.deviceId.push(deviceDetails.deviceId);
+    });
 
     let boilerLocation = {};
-    boilerLocation.latitude = 28.123;
-    boilerLocation.longitude = 120.51;
+    boilerLocation.latitude = "28.123N";
+    boilerLocation.longitude = "120.51E";
 
-    response.sensors = [0 ,1];
+    response.sensors = [0 ,1];      
     response.boilerLocation = boilerLocation;
     response.industryType = 1;
-    response.industryName = "Purifier Industry";
-    response.deviceId = [23, 59];
-    response.boilerID = "BL736";
+    response.industryName = "Purifier Industry";    
 
     let data = {};
     let gaseous = {};
     let liquid = {};    
+
+    let url = ''; //TODO - URL path
 
     cron.schedule("* * * * *", function() {
         gaseous.NH3 = gen().toString();
@@ -45,7 +56,28 @@ let pushData = async() => {
 
         response.data = data;
 
-        iotDeviceData.response = response
+        iotDeviceData.response = response;
+
+        console.log(JSON.stringify(iotDeviceData));
+
+        var options = {
+            method: 'post',
+            body: iotDeviceData,
+            json: true,
+            url: url
+        }
+
+        request(options, function (err, res, body) {
+            if (err) {
+              console.error('error posting json: ', err);
+              throw err;
+            }
+            var headers = res.headers
+            var statusCode = res.statusCode
+            console.log('headers: ', headers)
+            console.log('statusCode: ', statusCode)
+            console.log('body: ', body)
+        })
     });
 };
 
