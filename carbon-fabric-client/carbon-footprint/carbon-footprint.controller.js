@@ -11,16 +11,82 @@ var os            = require('os');
 
 module.exports = (function(){
     return {
-        insertIOTData: function(req,res){
-        console.log("submit recording of carbon footrpint: ");
+		get_data: function(ID, res){
 
-		const timestamp = req.body.timestamp
-		const boilerLocation = req.body.boilerLocation
-        const industryType = req.body.industryType
-        const industryName = req.body.industryName 
-        const pollutionParams_gaseous = req.body.data.gaseous
-        const pollutionParams_liquid = req.body.data.liquid
-        const boilerID = req.body.boilerID
+			var fabric_client = new Fabric_Client();
+			var key = ID
+	
+			// setup the fabric network
+			var channel = fabric_client.newChannel('mychannel');
+			var peer = fabric_client.newPeer('grpc://localhost:7051');
+			channel.addPeer(peer);
+	
+			//
+			var member_user = null;
+			var store_path = path.join(os.homedir(), '.hfc-key-store');
+			console.log('Store path:'+store_path);
+			var tx_id = null;
+	
+			// create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
+			Fabric_Client.newDefaultKeyValueStore({ path: store_path
+			}).then((state_store) => {
+				// assign the store to the fabric client
+				fabric_client.setStateStore(state_store);
+				var crypto_suite = Fabric_Client.newCryptoSuite();
+				// use the same location for the state store (where the users' certificate are kept)
+				// and the crypto store (where the users' keys are kept)
+				var crypto_store = Fabric_Client.newCryptoKeyStore({path: store_path});
+				crypto_suite.setCryptoKeyStore(crypto_store);
+				fabric_client.setCryptoSuite(crypto_suite);
+	
+				// get the enrolled user from persistence, this user will sign all requests
+				return fabric_client.getUserContext('user1', true);
+			}).then((user_from_store) => {
+				if (user_from_store && user_from_store.isEnrolled()) {
+					console.log('Successfully loaded user1 from persistence');
+					member_user = user_from_store;
+				} else {
+					throw new Error('Failed to get user1.... run registerUser.js');
+				}
+	
+				// queryTuna - requires 1 argument, ex: args: ['4'],
+				const request = {
+					chaincodeId: 'mycarbon',
+					txId: tx_id,
+					fcn: 'query',
+					args: [key]
+				};
+	
+				// send the query proposal to the peer
+				return channel.queryByChaincode(request);
+			}).then((query_responses) => {
+				console.log("Query has completed, checking results");
+				// query_responses could have more than one  results if there multiple peers were used as targets
+				if (query_responses && query_responses.length == 1) {
+					if (query_responses[0] instanceof Error) {
+						console.error("error from query = ", query_responses[0]);
+						res.send("Could not locate tuna")
+						
+					} else {
+						console.log("Response is ", query_responses[0].toString());
+						res.send(query_responses[0].toString())
+					}
+				} else {
+					console.log("No payloads were returned from query");
+					res.send("Could not locate tuna")
+				}
+			}).catch((err) => {
+				console.error('Failed to query successfully :: ' + err);
+				res.send("Could not locate tuna")
+			});
+		},
+        insertIOTData: function(data,res){
+		console.log("submit recording of carbon footrpint: ");
+		
+		let obj = data
+		obj = JSON.stringify(obj)
+		obj = obj.replace(/\"/g,'\\\"')
+		const ID = Date.now().toString()
 
 		var fabric_client = new Fabric_Client();
 
@@ -61,21 +127,16 @@ module.exports = (function(){
 		    // get a transaction id object based on the current user assigned to fabric client
 		    tx_id = fabric_client.newTransactionID();
 		    console.log("Assigning transaction_id: ", tx_id._transaction_id);
-
+			console.log('ID = ',ID)
 		    // recordTuna - requires 5 args, ID, vessel, location, timestamp,holder - ex: args: ['10', 'Hound', '-12.021, 28.012', '1504054225', 'Hansel'], 
-		    // send proposal to endorser
+			// send proposal to endorser
 		    const request = {
 		        //targets : --- letting this default to the peers assigned to the channel
-		        chaincodeId: 'tuna-app',
-		        fcn: 'recordTuna',
+		        chaincodeId: 'mycarbon',
+		        fcn: 'insertCarbon',
 				args: [
-						timestamp,
-						boilerLocation,
-						industryType, 
-						industryName, 
-						pollutionParams_gaseous,
-						pollutionParams_liquid,
-						boilerID
+						ID,
+						obj
 					],
 		        chainId: 'mychannel',
 		        txId: tx_id
@@ -84,6 +145,7 @@ module.exports = (function(){
 		    // send the transaction proposal to the peers
 		    return channel.sendTransactionProposal(request);
 		}).then((results) => {
+			console.log(results);
 		    var proposalResponses = results[0];
 		    var proposal = results[1];
 		    let isProposalGood = false;
@@ -175,6 +237,71 @@ module.exports = (function(){
 		}).catch((err) => {
 		    console.error('Failed to invoke successfully :: ' + err);
 		});    
-        }
+		},
+		get_all_data: function(){
+		console.log("getting all carbon pollution data from DB ");
+
+		var fabric_client = new Fabric_Client();
+
+		// setup the fabric network
+		var channel = fabric_client.newChannel('mychannel');
+		var peer = fabric_client.newPeer('grpc://localhost:7051');
+		channel.addPeer(peer);
+
+		//
+		var member_user = null;
+		var store_path = path.join(os.homedir(), '.hfc-key-store');
+		console.log('Store path:'+store_path);
+		var tx_id = null;
+
+		// create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
+		Fabric_Client.newDefaultKeyValueStore({ path: store_path
+		}).then((state_store) => {
+		    // assign the store to the fabric client
+		    fabric_client.setStateStore(state_store);
+		    var crypto_suite = Fabric_Client.newCryptoSuite();
+		    // use the same location for the state store (where the users' certificate are kept)
+		    // and the crypto store (where the users' keys are kept)
+		    var crypto_store = Fabric_Client.newCryptoKeyStore({path: store_path});
+		    crypto_suite.setCryptoKeyStore(crypto_store);
+		    fabric_client.setCryptoSuite(crypto_suite);
+
+		    // get the enrolled user from persistence, this user will sign all requests
+		    return fabric_client.getUserContext('user1', true);
+		}).then((user_from_store) => {
+		    if (user_from_store && user_from_store.isEnrolled()) {
+		        console.log('Successfully loaded user1 from persistence');
+		        member_user = user_from_store;
+		    } else {
+		        throw new Error('Failed to get user1.... run registerUser.js');
+		    }
+
+		    // queryAllCarbon- requires no arguments , ex: args: [''],
+		    const request = {
+		        chaincodeId: 'mycarbon',
+		        txId: tx_id,
+		        fcn: 'queryAllCarbonPollution',
+		        args: ['']
+		    };
+
+		    // send the query proposal to the peer
+		    return channel.queryByChaincode(request);
+		}).then((query_responses) => {
+		    console.log("Query has completed, checking results");
+		    // query_responses could have more than one  results if there multiple peers were used as targets
+		    if (query_responses && query_responses.length == 1) {
+		        if (query_responses[0] instanceof Error) {
+		            console.error("error from query = ", query_responses[0]);
+		        } else {
+		            console.log("Response is ", query_responses[0].toString());
+		            res.json(JSON.parse(query_responses[0].toString()));
+		        }
+		    } else {
+		        console.log("No payloads were returned from query");
+		    }
+		}).catch((err) => {
+		    console.error('Failed to query successfully :: ' + err);
+		});
+		}
     }
 })()    
