@@ -1,19 +1,32 @@
 import User from '../models/User';
+import shell from 'shelljs';
 
-let saveUser = async (name, email, password, role) => {
+let saveUser = async (name, email, password, role, org, channel) => {
     try {
         let response = {};
+        let peers = [];
+        peers.push('peer0.'+org+'.example.com');
+        peers.push('peer1.'+org+'.example.com');
         response.name = name;
         response.email = email;
         response.password = password;
         response.role = role;
-        await User.create({ name: name, email: email, password: password, role: role }, (err, obj) => {
+        response.org = org;
+        response.channel = channel;
+        response.peers = peers;
+        /*let shellResponse = await shell.exec('./dynamic-add-org.sh  '+org+' '+channel);
+        if(shellResponse == 1) {
+            //DB persistance code to be moved here
+        }
+        else {
+            return new Error("Failure to add organisation");
+        }*/
+        await User.create({ name: name, email: email, password: password, role: role, org: org, channel: channel, peers: peers }, (err, obj) => {
             if(!err) {
-               JSON.parse(JSON.stringify(obj));
-               console.log(obj);
+               JSON.parse(JSON.stringify(obj));               
                response = obj;
             }
-        });        
+        });
         return Promise.resolve(response);
     } catch (err) {
         return Promise.reject(err);
