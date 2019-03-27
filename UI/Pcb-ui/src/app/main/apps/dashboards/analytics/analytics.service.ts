@@ -63,7 +63,7 @@ export class AnalyticsDashboardService implements Resolve<any>
             this._httpClient.get('http://137.117.81.211:9090/pollutions/aqi').subscribe((response:any)=>{
                 this.abc=response;
                 console.log(this.abc)
-                debugger;
+
                 resolve(response);
             },reject)
         })

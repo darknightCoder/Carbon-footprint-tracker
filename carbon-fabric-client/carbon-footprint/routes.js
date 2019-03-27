@@ -6,6 +6,6 @@ var carbon = require('./controller.js');
 module.exports = function(app){
 
   app.post('/add/pollution',function(req,res){
-    carbon.insertIOTData(req, res);
+    return carbon.insertIOTData(req, res);
   })
 }

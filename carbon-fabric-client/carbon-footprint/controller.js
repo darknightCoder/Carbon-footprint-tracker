@@ -139,7 +139,7 @@ return{
 		    // send proposal to endorser
 		    const request = {
 		        //targets : --- letting this default to the peers assigned to the channel
-		        chaincodeId: 'carbon-footprint',
+		        chaincodeId: 'mycc',
 		        fcn: 'insertCarbon',
 				args: [
 						timestamp,
