@@ -51,13 +51,13 @@
                        #table [dataSource]="dataSource"
                       
                        [@animateStagger]="{value:'50'}"
-                       fusePerfectScrollbar>
+                       fusePerfectScrollbar fxLayoutGap="10px">
 
                 <!-- ID Column -->
                 <ng-container matColumnDef="gid">
                     <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
                     <mat-cell *matCellDef="let product">
-                        <p >{{product._id}} </p>
+                        <p class="width-75">{{product._id}} </p>
                     </mat-cell>
                 </ng-container>
 
@@ -75,7 +75,7 @@
                 <ng-container matColumnDef="category">
                     <mat-header-cell *matHeaderCellDef>Node Details</mat-header-cell>
                     <mat-cell *matCellDef="let product">
-                        <p class="" *ngFor="let peer of product.peers">
+                        <p class="width-35" *ngFor="let peer of product.peers">
                             {{peer}}
                         </p>
                     </mat-cell>
