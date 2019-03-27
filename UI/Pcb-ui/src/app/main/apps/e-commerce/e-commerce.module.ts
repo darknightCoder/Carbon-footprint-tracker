@@ -37,10 +37,7 @@ const routes: Routes = [
     },
     {
         path     : 'products/:id/:handle',
-        component: EcommerceProductComponent,
-        resolve  : {
-            data: EcommerceProductService
-        }
+        component: EcommerceProductComponent
     },
     {
         path     : 'orders',

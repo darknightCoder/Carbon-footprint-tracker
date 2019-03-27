@@ -52,7 +52,7 @@ export class EcommerceProductsService implements Resolve<any>
     getProducts(): Promise<any>
     {
         return new Promise((resolve, reject) => {
-            this._httpClient.get('api/e-commerce-products')
+            this._httpClient.get('http://137.117.81.211:9090/users')
                 .subscribe((response: any) => {
                     this.products = response;
                     this.onProductsChanged.next(this.products);

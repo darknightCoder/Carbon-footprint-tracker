@@ -70,10 +70,24 @@ export class LoginComponent implements OnInit
         
         //console.log(this.loginForm.value.email)
         let param=this.loginForm.value.email;
+        let req={
+            email:this.loginForm.value.email,
+            password:this.loginForm.value.password
+        }
         return new Promise((resolve,reject)=>{
-            this._httpClient.get(`http://localhost:9090/users/${param}`).subscribe((response:any)=>{
-               
-                this._fuseConfigService.setRole(response.role);
+            this._httpClient.post(`http://137.117.81.211:9090/sessions/login`,req).subscribe((response:any)=>{
+               let role;
+               if(response==null){
+                this.router.navigateByUrl('/login');
+               }
+               if(response.role=='2'){
+                   role='admin'
+               }else if (response.role=='1'){
+                   role='company'
+               }else{
+                this.router.navigateByUrl('/login');
+               }
+                this._fuseConfigService.setRole(role);
                 console.log("role is : " + this._fuseConfigService.getRole())
                 resolve(response);
             },reject)

@@ -14,7 +14,14 @@ let saveUser = async (name, email, password, role, org, channel) => {
         response.org = org;
         response.channel = channel;
         response.peers = peers;
-        /*let shellResponse = await shell.exec('./dynamic-add-org.sh  '+org+' '+channel);
+        try {
+            shell.exec('/home/ubuntu/fabric-samples/first-network/dynamic-add-org.sh up '+org+' '+channel);
+
+//          shell.exec('/home/ubuntu/fabric-samples/first-network/dynamic-add-org.sh up'+org+' '+channel);}
+    }           catch(e) {
+         console.log(e);
+        }
+
         if(shellResponse == 1) {
             //DB persistance code to be moved here
         }

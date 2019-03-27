@@ -10,6 +10,7 @@ import { FuseUtils } from '@fuse/utils';
 
 import { Product } from 'app/main/apps/e-commerce/product/product.model';
 import { EcommerceProductService } from 'app/main/apps/e-commerce/product/product.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector     : 'e-commerce-product',
@@ -20,9 +21,11 @@ import { EcommerceProductService } from 'app/main/apps/e-commerce/product/produc
 })
 export class EcommerceProductComponent implements OnInit, OnDestroy
 {
-    product: Product;
-    pageType: string;
+    product:any = {};
+    iot:any = {};
+
     productForm: FormGroup;
+    pageType= 'new';
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -39,11 +42,12 @@ export class EcommerceProductComponent implements OnInit, OnDestroy
         private _ecommerceProductService: EcommerceProductService,
         private _formBuilder: FormBuilder,
         private _location: Location,
+        private httpClient: HttpClient,
         private _matSnackBar: MatSnackBar
     )
     {
         // Set the default
-        this.product = new Product();
+
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();
@@ -59,23 +63,8 @@ export class EcommerceProductComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         // Subscribe to update product on changes
-        this._ecommerceProductService.onProductChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(product => {
+        this.productForm = this.createProductForm();
 
-                if ( product )
-                {
-                    this.product = new Product(product);
-                    this.pageType = 'edit';
-                }
-                else
-                {
-                    this.pageType = 'new';
-                    this.product = new Product();
-                }
-
-                this.productForm = this.createProductForm();
-            });
     }
 
     /**
@@ -100,25 +89,20 @@ export class EcommerceProductComponent implements OnInit, OnDestroy
     createProductForm(): FormGroup
     {
         return this._formBuilder.group({
-            id              : [this.product.id],
+            id              : [''],
             name            : [this.product.name],
-            handle          : [this.product.handle],
+            email          : [this.product.email],
+            org            : [this.product.org],
             description     : [this.product.description],
-            categories      : [this.product.categories],
             tags            : [this.product.tags],
-            images          : [this.product.images],
-            priceTaxExcl    : [this.product.priceTaxExcl],
-            priceTaxIncl    : [this.product.priceTaxIncl],
-            taxRate         : [this.product.taxRate],
-            comparedPrice   : [this.product.comparedPrice],
-            quantity        : [this.product.quantity],
-            sku             : [this.product.sku],
-            width           : [this.product.width],
-            height          : [this.product.height],
-            depth           : [this.product.depth],
-            weight          : [this.product.weight],
-            extraShippingFee: [this.product.extraShippingFee],
-            active          : [this.product.active]
+            password          : [this.product.password],
+            deviceId    : [this.iot.deviceId],
+            deviceType    : [this.iot.deviceType],
+            boilerId         : [this.iot.boilerId],
+            longitude   : [this.iot.longitude],
+            latitude        : [this.iot.latitude],
+            channel             : [this.product.channel],
+            delay           : [this.product.delay],
         });
     }
 
@@ -152,20 +136,54 @@ export class EcommerceProductComponent implements OnInit, OnDestroy
         const data = this.productForm.getRawValue();
         data.handle = FuseUtils.handleize(data.name);
 
-        this._ecommerceProductService.addProduct(data)
-            .then(() => {
+        this.saveIndustry(data)
+        .subscribe((data) => {
+            this._matSnackBar.open('Added the Organization in the hyperledger network', 'OK', {
+                verticalPosition: 'top',
+                duration        : 2000
+            });
+            this._matSnackBar.open('Create channel', 'OK', {
+                verticalPosition: 'top',
+                duration        : 2000
+            });
 
-                // Trigger the subscription with new data
-                this._ecommerceProductService.onProductChanged.next(data);
-
-                // Show the success message
-                this._matSnackBar.open('Product added', 'OK', {
+            // Change the location with new one
+            this.saveIot(data)
+            .subscribe((data) => {
+                this._matSnackBar.open('Added the IOT', 'OK', {
                     verticalPosition: 'top',
                     duration        : 2000
                 });
-
-                // Change the location with new one
-                this._location.go('apps/e-commerce/products/' + this.product.id + '/' + this.product.handle);
+                this._location.go('apps/e-commerce/products/');  
             });
+           
+        });
+
+    }
+    saveIndustry(body){
+        const bodyTest = {
+            'name': this.productForm.value.name || 'TEST',
+            'email': this.productForm.value.email || 'noreply@test.com',
+            'password': this.productForm.value.password || 'pass',
+            'role': 1,
+            'org': this.productForm.value.org || 'test',
+            'channel': this.productForm.value.channel || 'channel_fertlizers_pcb'
+        };
+        console.log(bodyTest);
+        return this.httpClient.post('http://137.117.81.211:9090/users', bodyTest);
+    }
+    saveIot(body){
+        const bodyTest = {
+            'deviceId': this.productForm.value.deviceId || 'D009',
+            'deviceType': this.productForm.value.deviceType || 'Barometer',
+            'boilerId': this.productForm.value.boilerId || 'B84',
+            'longitude': this.productForm.value.longitude || '43N',
+            'latitude': this.productForm.value.longitude || '12E'
+        };
+        console.log(bodyTest);
+        return this.httpClient.post('http://137.117.81.211:9090/devices', bodyTest);
+    }
+    getProducts(){
+        return this.httpClient.get('http://137.117.81.211:9090/');
     }
 }
