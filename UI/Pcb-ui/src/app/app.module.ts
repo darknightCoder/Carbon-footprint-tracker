@@ -34,10 +34,6 @@ const appRoutes: Routes = [
         path        : 'pages',
         loadChildren: './main/pages/pages.module#PagesModule'
     },
-    {
-        path        : 'ui',
-        loadChildren: './main/ui/ui.module#UIModule'
-    },
     // {
     //     path        : 'documentation',
     //     loadChildren: './main/documentation/documentation.module#DocumentationModule'
